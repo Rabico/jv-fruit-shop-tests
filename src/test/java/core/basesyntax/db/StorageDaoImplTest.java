@@ -1,0 +1,102 @@
+package core.basesyntax.db;
+
+import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StorageDaoImplTest {
+    private StorageDaoImpl storageDao;
+    @BeforeEach
+    void BeforeEach() {
+    storageDao = new StorageDaoImpl();
+    storageDao.getFruits().clear();
+    }
+
+    @Test
+    void add_correctFruits_OK() {
+        storageDao.add(new FruitTransaction("b", "apple", 20));
+        storageDao.add(new FruitTransaction("p", "banana", 12));
+        storageDao.add(new FruitTransaction("r", "cherry", 15));
+        storageDao.add(new FruitTransaction("s", "strawberry", 30));
+        assertEquals(20, storageDao.getFruits().get("apple"));
+        assertEquals(12, storageDao.getFruits().get("banana"));
+        assertEquals(15, storageDao.getFruits().get("cherry"));
+        assertEquals(30, storageDao.getFruits().get("strawberry"));
+    }
+
+    @Test
+    void add_nullFruit_throwsException() {
+        assertThrows(NullPointerException.class, () -> storageDao.add(null));
+    }
+
+    @Test
+    void actualQuantity_fruitNull_throwsException() {
+        assertThrows(NullPointerException.class, () -> storageDao.actualQuantity(null));
+    }
+
+    @Test
+    void actualQuantity_notExistFruit_throwsException() {
+        assertThrows(NullPointerException.class, () -> storageDao.actualQuantity("apple"));
+    }
+    @Test
+    void actualQuantity_existFruit_OK() {
+        storageDao.getFruits().put("apple", 20);
+        storageDao.getFruits().put("banana", 12);
+        storageDao.getFruits().put("cherry", 15);
+        storageDao.getFruits().put("strawberry", 30);
+        assertEquals(20, storageDao.actualQuantity("apple"));
+        assertEquals(12, storageDao.actualQuantity("banana"));
+        assertEquals(15, storageDao.actualQuantity("cherry"));
+        assertEquals(30, storageDao.actualQuantity("strawberry"));
+    }
+
+    @Test
+    void updateQuantity_OK() {
+        storageDao.getFruits().put("apple", 20);
+        storageDao.getFruits().put("banana", 12);
+        storageDao.getFruits().put("cherry", 15);
+        storageDao.getFruits().put("strawberry", 30);
+        storageDao.updateQuantity("apple", 1);
+        storageDao.updateQuantity("banana", 2);
+        storageDao.updateQuantity("cherry", 3);
+        storageDao.updateQuantity("strawberry", 4);
+        assertEquals(1, storageDao.getFruits().get("apple"));
+        assertEquals(2, storageDao.getFruits().get("banana"));
+        assertEquals(3, storageDao.getFruits().get("cherry"));
+        assertEquals(4, storageDao.getFruits().get("strawberry"));
+    }
+
+    @Test
+    void getData_OK() {
+        storageDao.getFruits().put("apple", 20);
+        storageDao.getFruits().put("banana", 12);
+        storageDao.getFruits().put("cherry", 15);
+        storageDao.getFruits().put("strawberry", 30);
+        Map<String, Integer> expected = new LinkedHashMap<>();
+        expected.put("apple", 20);
+        expected.put("banana", 12);
+        expected.put("cherry", 15);
+        expected.put("strawberry", 30);
+        assertEquals(expected, storageDao.getData());
+    }
+    @Test
+    void checkFruit_OK() {
+        storageDao.getFruits().put("apple", 20);
+        storageDao.getFruits().put("banana", 12);
+        storageDao.getFruits().put("cherry", 15);
+        storageDao.getFruits().put("strawberry", 30);
+        assertTrue(storageDao.checkFruit("apple"));
+        assertTrue(storageDao.checkFruit("banana"));
+        assertTrue(storageDao.checkFruit("cherry"));
+        assertTrue(storageDao.checkFruit("strawberry"));
+    }
+    @Test
+    void checkFruit_notOK() {
+        assertFalse(storageDao.checkFruit("apple"));
+    }
+}
