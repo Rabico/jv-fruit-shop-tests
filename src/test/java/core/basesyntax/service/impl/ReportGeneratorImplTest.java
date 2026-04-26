@@ -1,0 +1,34 @@
+package core.basesyntax.service.impl;
+
+import core.basesyntax.db.StorageDao;
+import core.basesyntax.db.StorageDaoImpl;
+import org.junit.jupiter.api.Test;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+class ReportGeneratorImplTest {
+    private StorageDao storageDao;
+    private ReportGeneratorImpl reportGenerator;
+
+    @Test
+    void reportGenerator_Ok() {
+    storageDao = mock(StorageDao.class);
+    reportGenerator = new ReportGeneratorImpl(storageDao);
+    Map <String, Integer> actualMap = new LinkedHashMap<>();
+    actualMap.put("apple", 10);
+    actualMap.put("orange", 20);
+    when(storageDao.getData()).thenReturn(actualMap);
+    StringBuilder expected = new StringBuilder();
+    expected.append("apple,10")
+            .append(System.lineSeparator()).
+            append("orange,20");
+    String expectedString = expected.toString();
+    String actualString = reportGenerator.generateReport();
+    assertEquals(expectedString, actualString);
+    }
+}
