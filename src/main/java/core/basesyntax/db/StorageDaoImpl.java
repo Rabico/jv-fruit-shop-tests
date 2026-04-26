@@ -5,11 +5,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
+    private final Map<String, Integer> fruits = new LinkedHashMap<>();
+
     public Map<String, Integer> getFruits() {
         return fruits;
     }
-
-    private final Map<String, Integer> fruits = new LinkedHashMap<>();
 
     @Override
     public void add(FruitTransaction fruit) {

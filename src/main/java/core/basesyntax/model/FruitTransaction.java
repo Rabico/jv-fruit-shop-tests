@@ -28,4 +28,27 @@ public class FruitTransaction {
     public Operation getOperation() {
         return operation;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = hash + name.hashCode() * 11
+                + quantity
+                + operation.hashCode() * 13;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        FruitTransaction fruitTransaction = (FruitTransaction) obj;
+        return quantity == fruitTransaction.quantity
+                && name.equals(fruitTransaction.name)
+                && operation.equals(fruitTransaction.operation);
+    }
 }
