@@ -24,9 +24,12 @@ class ReportGeneratorImplTest {
     actualMap.put("orange", 20);
     when(storageDao.getData()).thenReturn(actualMap);
     StringBuilder expected = new StringBuilder();
-    expected.append("apple,10")
-            .append(System.lineSeparator()).
-            append("orange,20");
+    expected.append("fruit,quantity")
+            .append(System.lineSeparator())
+            .append("apple,10")
+            .append(System.lineSeparator())
+            .append("orange,20")
+            .append(System.lineSeparator());
     String expectedString = expected.toString();
     String actualString = reportGenerator.generateReport();
     assertEquals(expectedString, actualString);
