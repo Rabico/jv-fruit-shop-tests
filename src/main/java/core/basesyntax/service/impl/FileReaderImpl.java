@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReader {
     @Override
-    public List<String> read(String fileName) {
+    public List<String> readTransactionsFromFile(String fileName) {
         List<String> list = new ArrayList<>();
 
         InputStream inputStream = getClass()

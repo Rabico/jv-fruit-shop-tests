@@ -1,9 +1,10 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.BeforeEach;
+import core.basesyntax.model.Operation;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,18 +14,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StorageDaoImplTest {
     private StorageDaoImpl storageDao;
+
     @BeforeEach
-    void BeforeEach() {
-    storageDao = new StorageDaoImpl();
-    storageDao.getFruits().clear();
+    void beforeEach() {
+        storageDao = new StorageDaoImpl();
+        storageDao.getFruits().clear();
     }
 
     @Test
     void add_correctFruits_OK() {
-        storageDao.add(new FruitTransaction("b", "apple", 20));
-        storageDao.add(new FruitTransaction("p", "banana", 12));
-        storageDao.add(new FruitTransaction("r", "cherry", 15));
-        storageDao.add(new FruitTransaction("s", "strawberry", 30));
+        storageDao.add(new FruitTransaction(Operation.BALANCE, "apple", 20));
+        storageDao.add(new FruitTransaction(Operation.PURCHASE, "banana", 12));
+        storageDao.add(new FruitTransaction(Operation.RETURN, "cherry", 15));
+        storageDao.add(new FruitTransaction(Operation.SUPPLY, "strawberry", 30));
         assertEquals(20, storageDao.getFruits().get("apple"));
         assertEquals(12, storageDao.getFruits().get("banana"));
         assertEquals(15, storageDao.getFruits().get("cherry"));
@@ -38,13 +40,14 @@ class StorageDaoImplTest {
 
     @Test
     void actualQuantity_fruitNull_throwsException() {
-        assertThrows(NullPointerException.class, () -> storageDao.actualQuantity(null));
+        assertThrows(RuntimeException.class, () -> storageDao.actualQuantity(null));
     }
 
     @Test
     void actualQuantity_notExistFruit_throwsException() {
-        assertThrows(NullPointerException.class, () -> storageDao.actualQuantity("apple"));
+        assertThrows(RuntimeException.class, () -> storageDao.actualQuantity("apple"));
     }
+
     @Test
     void actualQuantity_existFruit_OK() {
         storageDao.getFruits().put("apple", 20);
@@ -86,6 +89,7 @@ class StorageDaoImplTest {
         expected.put("strawberry", 30);
         assertEquals(expected, storageDao.getData());
     }
+
     @Test
     void checkFruit_OK() {
         storageDao.getFruits().put("apple", 20);
@@ -97,6 +101,7 @@ class StorageDaoImplTest {
         assertTrue(storageDao.checkFruit("cherry"));
         assertTrue(storageDao.checkFruit("strawberry"));
     }
+
     @Test
     void checkFruit_notOK() {
         assertFalse(storageDao.checkFruit("apple"));

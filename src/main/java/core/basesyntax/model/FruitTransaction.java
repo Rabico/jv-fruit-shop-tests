@@ -5,7 +5,7 @@ public class FruitTransaction {
     private int quantity;
     private Operation operation;
 
-    public FruitTransaction(String operation, String name, int quantity) {
+    public FruitTransaction(Operation operation, String name, int quantity) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Fruit name cannot be null or blank");
         }
@@ -14,7 +14,7 @@ public class FruitTransaction {
             throw new IllegalArgumentException("quantity can't be negative");
         }
         this.quantity = quantity;
-        this.operation = Operation.fromCode(operation);
+        this.operation = operation;
     }
 
     public String getName() {
@@ -52,3 +52,4 @@ public class FruitTransaction {
                 && operation.equals(fruitTransaction.operation);
     }
 }
+

@@ -2,52 +2,46 @@ package core.basesyntax.model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FruitTransactionTest {
 
     @Test
-    void FruitTransaction_negativeQuantity_throwsException() {
+    void fruitTransaction_negativeQuantity_throwsException() {
         assertThrows(IllegalArgumentException.class, () ->
-                new FruitTransaction("b", "apple", -20));
+                new FruitTransaction(Operation.BALANCE, "apple", -20));
     }
+
     @Test
-    void FruitTransaction_nullFruit_throwsException() {
+    void fruitTransaction_nullFruit_throwsException() {
         assertThrows(IllegalArgumentException.class, () ->
-                new FruitTransaction("b", null, 10));
+                new FruitTransaction(Operation.BALANCE, null, 10));
     }
+
     @Test
-    void FruitTransaction_blankFruit_throwsException() {
+    void fruitTransaction_blankFruit_throwsException() {
         assertThrows(IllegalArgumentException.class, () ->
-                new FruitTransaction("b", "", 10));
+                new FruitTransaction(Operation.BALANCE, "", 10));
     }
+
     @Test
-    void FruitTransaction_OK() {
-        FruitTransaction fruitTransaction_1 = new FruitTransaction("b", "apple", 20);
-        FruitTransaction fruitTransaction_2 = new FruitTransaction("p", "banana", 25);
-        FruitTransaction fruitTransaction_3 = new FruitTransaction("r", "cherry", 30);
-        FruitTransaction fruitTransaction_4 = new FruitTransaction("s", "strawberry", 35);
-        assertEquals(fruitTransaction_1.getName(), "apple");
-        assertEquals(fruitTransaction_2.getName(), "banana");
-        assertEquals(fruitTransaction_3.getName(), "cherry");
-        assertEquals(fruitTransaction_4.getName(), "strawberry");
-        assertEquals(fruitTransaction_1.getQuantity(), 20);
-        assertEquals(fruitTransaction_2.getQuantity(), 25);
-        assertEquals(fruitTransaction_3.getQuantity(), 30);
-        assertEquals(fruitTransaction_4.getQuantity(), 35);
-        assertEquals(fruitTransaction_1.getOperation(), Operation.BALANCE);
-        assertEquals(fruitTransaction_2.getOperation(), Operation.PURCHASE);
-        assertEquals(fruitTransaction_3.getOperation(), Operation.RETURN);
-        assertEquals(fruitTransaction_4.getOperation(), Operation.SUPPLY);
-    }
-    @Test
-    void FruitTransaction_nullOperation_throwsException() {
-        assertThrows(IllegalArgumentException.class, () ->
-                new FruitTransaction(null, "apple", 20));
-    }
-    @Test
-    void FruitTransaction_wrongOperationCode_throwsException() {
-        assertThrows(IllegalArgumentException.class, () ->
-                new FruitTransaction("a", "apple", 20));
+    void fruitTransaction_OK() {
+        FruitTransaction fruitTransaction1 = new FruitTransaction(Operation.BALANCE, "apple", 20);
+        FruitTransaction fruitTransaction2 = new FruitTransaction(Operation.PURCHASE, "banana", 25);
+        FruitTransaction fruitTransaction3 = new FruitTransaction(Operation.RETURN, "cherry", 30);
+        FruitTransaction fruitTransaction4 = new FruitTransaction(Operation.SUPPLY, "strawberry", 35);
+        assertEquals(fruitTransaction1.getName(), "apple");
+        assertEquals(fruitTransaction2.getName(), "banana");
+        assertEquals(fruitTransaction3.getName(), "cherry");
+        assertEquals(fruitTransaction4.getName(), "strawberry");
+        assertEquals(fruitTransaction1.getQuantity(), 20);
+        assertEquals(fruitTransaction2.getQuantity(), 25);
+        assertEquals(fruitTransaction3.getQuantity(), 30);
+        assertEquals(fruitTransaction4.getQuantity(), 35);
+        assertEquals(fruitTransaction1.getOperation(), Operation.BALANCE);
+        assertEquals(fruitTransaction2.getOperation(), Operation.PURCHASE);
+        assertEquals(fruitTransaction3.getOperation(), Operation.RETURN);
+        assertEquals(fruitTransaction4.getOperation(), Operation.SUPPLY);
     }
 }

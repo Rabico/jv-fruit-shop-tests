@@ -37,7 +37,7 @@ public class Main {
         operations.put(Operation.SUPPLY, new SupplyOperationHandler(dao));
         // 1.Reading data from CSV file
         FileReader fileReader = new FileReaderImpl();
-        List<String> transactionList = fileReader.read(INPUT_FILE);
+        List<String> transactionList = fileReader.readTransactionsFromFile(INPUT_FILE);
         // 2. Convert data from String List to Fruit Transaction List
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> fruitTransactions = dataConverter
@@ -50,6 +50,6 @@ public class Main {
         String report = generator.generateReport();
         // 5. Save report to file
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(report, OUTPUT_FILE);
+        fileWriter.writeReportToFile(report, OUTPUT_FILE);
     }
 }
