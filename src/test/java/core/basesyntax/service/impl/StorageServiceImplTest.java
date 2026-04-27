@@ -1,32 +1,28 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.StorageDao;
-import core.basesyntax.db.StorageDaoImpl;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.StorageService;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class StorageServiceImplTest {
-    static Map<Operation, OperationHandler> map = new HashMap<>();
-    List<FruitTransaction> fruitTransactions = new ArrayList<>();
-    static StorageService storageService;
-    static OperationHandler operationHandlerReturn;
-    static OperationHandler operationHandlerBalance;
-    static OperationHandler operationHandlerSupply;
-    static OperationHandler operationHandlerPurchase;
+    private static Map<Operation, OperationHandler> map = new HashMap<>();
+    private static StorageService storageService;
+    private static OperationHandler operationHandlerReturn;
+    private static OperationHandler operationHandlerBalance;
+    private static OperationHandler operationHandlerSupply;
+    private static OperationHandler operationHandlerPurchase;
+    private List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
     @BeforeAll
     static void beforeAll() {

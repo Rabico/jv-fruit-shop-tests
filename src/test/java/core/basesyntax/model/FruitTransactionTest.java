@@ -1,9 +1,9 @@
 package core.basesyntax.model;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
 
@@ -27,13 +27,17 @@ class FruitTransactionTest {
 
     @Test
     void fruitTransaction_OK() {
-        FruitTransaction fruitTransaction1 = new FruitTransaction(Operation.BALANCE, "apple", 20);
-        FruitTransaction fruitTransaction2 = new FruitTransaction(Operation.PURCHASE, "banana", 25);
-        FruitTransaction fruitTransaction3 = new FruitTransaction(Operation.RETURN, "cherry", 30);
-        FruitTransaction fruitTransaction4 = new FruitTransaction(Operation.SUPPLY, "strawberry", 35);
+        FruitTransaction fruitTransaction1 = new FruitTransaction(Operation.BALANCE,
+                "apple", 20);
         assertEquals(fruitTransaction1.getName(), "apple");
+        FruitTransaction fruitTransaction2 = new FruitTransaction(Operation.PURCHASE,
+                "banana", 25);
         assertEquals(fruitTransaction2.getName(), "banana");
+        FruitTransaction fruitTransaction3 = new FruitTransaction(Operation.RETURN,
+                "cherry", 30);
         assertEquals(fruitTransaction3.getName(), "cherry");
+        FruitTransaction fruitTransaction4 = new FruitTransaction(Operation.SUPPLY,
+                "strawberry", 35);
         assertEquals(fruitTransaction4.getName(), "strawberry");
         assertEquals(fruitTransaction1.getQuantity(), 20);
         assertEquals(fruitTransaction2.getQuantity(), 25);
