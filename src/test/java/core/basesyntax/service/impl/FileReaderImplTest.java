@@ -1,7 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +18,21 @@ class FileReaderImplTest {
     }
 
     @Test
-    void convertToTransaction_OK() {
-        fileReaderImpl.readTransactionsFromFile("testFile.csv");
+    void readTransactionsFromFile_validFile_ok() {
+        List<String> actual = fileReaderImpl.readTransactionsFromFile("testFile.csv");
+        List<String> expected = new ArrayList<>();
+        expected.add("a, apple,12");
+        assertEquals(expected, actual);
     }
 
     @Test
-    void convertToTransaction_wrongFileName_ThrowsException() {
+    void readTransactionsFromFile_wrongFileName_ThrowsException() {
         assertThrows(RuntimeException.class, () ->
                 fileReaderImpl.readTransactionsFromFile("test.csv"));
+    }
+
+    @Test
+    void readTransactionsFromFile_fileWithOnlyHeader_returnsEmptyList() {
+        assertTrue(fileReaderImpl.readTransactionsFromFile("testFileEmptyList.csv").isEmpty());
     }
 }

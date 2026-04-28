@@ -36,7 +36,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertToTransaction_OK() {
+    void convertToTransaction_existingTransactions_ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(Operation.BALANCE, "banana", 10));
         expected.add(new FruitTransaction(Operation.PURCHASE, "apple", 15));
@@ -47,10 +47,7 @@ class DataConverterImplTest {
         list.add("r, cherry, 20");
         list.add("s, strawberry, 25");
         List<FruitTransaction> actual = dataConverterImpl.convertToTransaction(list);
-        assertEquals(expected.toArray()[0], actual.toArray()[0]);
-        assertEquals(expected.toArray()[1], actual.toArray()[1]);
-        assertEquals(expected.toArray()[2], actual.toArray()[2]);
-        assertEquals(expected.toArray()[3], actual.toArray()[3]);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -72,5 +69,38 @@ class DataConverterImplTest {
         list.add("b, , 80");
         assertThrows(IllegalArgumentException.class, () ->
                 dataConverterImpl.convertToTransaction(list));
+    }
+
+    @Test
+    void convertTransaction_emptyInput_throwsException() {
+        assertThrows(IllegalArgumentException.class, () ->
+                dataConverterImpl.convertToTransaction(list));
+    }
+
+    @Test
+    void convertTransaction_extraSpaces_ok() {
+        List<FruitTransaction> expected = new ArrayList<>();
+        expected.add(new FruitTransaction(Operation.BALANCE, "banana", 10));
+        expected.add(new FruitTransaction(Operation.PURCHASE, "apple", 15));
+        expected.add(new FruitTransaction(Operation.RETURN, "cherry", 20));
+        list.add("   b     , banana, 10");
+        list.add("p,      apple     , 15");
+        list.add("r, cherry,      20    ");
+        List<FruitTransaction> actual = dataConverterImpl.convertToTransaction(list);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void convertTransaction_zeroQuantity_ok() {
+        List<FruitTransaction> expected = new ArrayList<>();
+        expected.add(new FruitTransaction(Operation.BALANCE, "banana", 0));
+        list.add("b, banana, 0");
+        assertEquals(expected, dataConverterImpl.convertToTransaction(list));
+    }
+
+    @Test
+    void convertTransaction_nullInput_throwsException() {
+        assertThrows(IllegalArgumentException.class, () ->
+                dataConverterImpl.convertToTransaction(null));
     }
 }

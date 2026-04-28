@@ -23,14 +23,14 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void execute_existingFruit_Ok() {
+    void execute_existingFruit_ok() {
         when(storageDao.checkFruit("apple")).thenReturn(true);
         balanceOperationHandler.execute(fruitTransaction);
         verify(storageDao).updateQuantity("apple", 20);
     }
 
     @Test
-    void execute_nonExistingFruit_Ok() {
+    void execute_nonExistingFruit_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.BALANCE, "apple", 20);
         when(storageDao.checkFruit("apple")).thenReturn(false);
         balanceOperationHandler.execute(fruitTransaction);

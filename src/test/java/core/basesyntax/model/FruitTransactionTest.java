@@ -26,7 +26,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void fruitTransaction_OK() {
+    void fruitTransaction_existingFruits_ok() {
         FruitTransaction fruitTransaction1 = new FruitTransaction(Operation.BALANCE,
                 "apple", 20);
         assertEquals(fruitTransaction1.getName(), "apple");

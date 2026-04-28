@@ -22,14 +22,14 @@ class SupplyOperationHandlerTest {
     }
 
     @Test
-    void execute_notExistingFruit_Ok() {
+    void execute_notExistingFruit_ok() {
         when(storageDao.checkFruit("apple")).thenReturn(false);
         supplyOperationHandler.execute(fruitTransaction);
         verify(storageDao).add(fruitTransaction);
     }
 
     @Test
-    void execute_existingFruit_Ok() {
+    void execute_existingFruit_ok() {
         when(storageDao.checkFruit("apple")).thenReturn(true);
         when(storageDao.actualQuantity("apple")).thenReturn(25);
         supplyOperationHandler.execute(fruitTransaction);

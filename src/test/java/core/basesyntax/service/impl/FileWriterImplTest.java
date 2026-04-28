@@ -1,7 +1,12 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +19,18 @@ class FileWriterImplTest {
     }
 
     @Test
-    void writeReportToFile_OK() {
+    void writeReportToFile_correctPath_ok() {
+
         fileWriterImpl.writeReportToFile("Report", "testOk");
+        File file = new File("target/testOk");
+        assertTrue(file.exists());
+        try {
+            String actual = Files.readString(file.toPath());
+            assertEquals("Report" + System.lineSeparator(), actual);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Test

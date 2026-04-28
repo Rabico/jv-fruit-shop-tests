@@ -30,7 +30,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void execute_Ok() {
+    void execute_existingFruit_ok() {
         when(storageDao.checkFruit("apple")).thenReturn(true);
         when(storageDao.actualQuantity("apple")).thenReturn(25);
         returnOperationHandler.execute(fruitTransaction);

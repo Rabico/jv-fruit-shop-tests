@@ -22,7 +22,7 @@ class StorageDaoImplTest {
     }
 
     @Test
-    void add_correctFruits_OK() {
+    void add_correctFruits_ok() {
         storageDao.add(new FruitTransaction(Operation.BALANCE, "apple", 20));
         storageDao.add(new FruitTransaction(Operation.PURCHASE, "banana", 12));
         storageDao.add(new FruitTransaction(Operation.RETURN, "cherry", 15));
@@ -49,7 +49,7 @@ class StorageDaoImplTest {
     }
 
     @Test
-    void actualQuantity_existFruit_OK() {
+    void actualQuantity_existFruit_ok() {
         storageDao.getFruits().put("apple", 20);
         storageDao.getFruits().put("banana", 12);
         storageDao.getFruits().put("cherry", 15);
@@ -61,7 +61,7 @@ class StorageDaoImplTest {
     }
 
     @Test
-    void updateQuantity_OK() {
+    void updateQuantity_existingFruits_ok() {
         storageDao.getFruits().put("apple", 20);
         storageDao.getFruits().put("banana", 12);
         storageDao.getFruits().put("cherry", 15);
@@ -77,7 +77,7 @@ class StorageDaoImplTest {
     }
 
     @Test
-    void getData_OK() {
+    void getData_storageContainsFruits_ok() {
         storageDao.getFruits().put("apple", 20);
         storageDao.getFruits().put("banana", 12);
         storageDao.getFruits().put("cherry", 15);
@@ -91,7 +91,7 @@ class StorageDaoImplTest {
     }
 
     @Test
-    void checkFruit_OK() {
+    void checkFruit_existingFruit_ok() {
         storageDao.getFruits().put("apple", 20);
         storageDao.getFruits().put("banana", 12);
         storageDao.getFruits().put("cherry", 15);
@@ -103,7 +103,7 @@ class StorageDaoImplTest {
     }
 
     @Test
-    void checkFruit_notOK() {
+    void checkFruit_missingFruit_notOk() {
         assertFalse(storageDao.checkFruit("apple"));
     }
 }

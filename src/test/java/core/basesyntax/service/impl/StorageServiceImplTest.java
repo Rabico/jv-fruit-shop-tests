@@ -43,7 +43,7 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void process_Return_Ok() {
+    void process_returnTransaction_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.RETURN, "apple", 230);
         fruitTransactions.add(fruitTransaction);
         storageService.process(fruitTransactions);
@@ -51,7 +51,7 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void process_Balance_Ok() {
+    void process_balanceTransaction_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.BALANCE, "apple", 230);
         fruitTransactions.add(fruitTransaction);
         storageService.process(fruitTransactions);
@@ -59,7 +59,7 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void process_Supply_Ok() {
+    void process_supplyTransaction_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.SUPPLY, "apple", 230);
         fruitTransactions.add(fruitTransaction);
         storageService.process(fruitTransactions);
@@ -67,7 +67,7 @@ class StorageServiceImplTest {
     }
 
     @Test
-    void process_Purchase_Ok() {
+    void process_purchaseTransaction_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.PURCHASE, "apple", 230);
         fruitTransactions.add(fruitTransaction);
         storageService.process(fruitTransactions);

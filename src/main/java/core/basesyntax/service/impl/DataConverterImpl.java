@@ -6,8 +6,12 @@ import core.basesyntax.service.DataConverter;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> transactions) {
+        if (transactions == null || transactions.isEmpty()) {
+            throw new IllegalArgumentException("Transactions cannot be null or empty");
+        }
         return transactions.stream().map(s -> s.split(","))
                 .map(this::parseTransaction)
                 .toList();
