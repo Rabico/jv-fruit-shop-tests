@@ -1,5 +1,10 @@
 package core.basesyntax.service.impl;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.StorageService;
@@ -10,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.mockito.Mockito.*;
 
 class StorageServiceImplTest {
     private Map<Operation, OperationHandler> map = new HashMap<>();
@@ -83,25 +86,25 @@ class StorageServiceImplTest {
 
     @Test
     void process_multipleTransactions_ok() {
-    FruitTransaction fruitTransaction1 = new FruitTransaction(Operation.RETURN, "apple", 230);
-    FruitTransaction fruitTransaction2 = new FruitTransaction(Operation.BALANCE, "apple", 230);
-    FruitTransaction fruitTransaction3 = new FruitTransaction(Operation.SUPPLY, "apple", 230);
-    FruitTransaction fruitTransaction4 = new FruitTransaction(Operation.PURCHASE, "apple", 230);
-    fruitTransactions.add(fruitTransaction1);
-    fruitTransactions.add(fruitTransaction1);
-    fruitTransactions.add(fruitTransaction1);
-    fruitTransactions.add(fruitTransaction2);
-    fruitTransactions.add(fruitTransaction3);
-    fruitTransactions.add(fruitTransaction3);
-    fruitTransactions.add(fruitTransaction3);
-    fruitTransactions.add(fruitTransaction3);
-    fruitTransactions.add(fruitTransaction4);
-    fruitTransactions.add(fruitTransaction4);
-    storageService.process(fruitTransactions);
-    verify(operationHandlerBalance, times(1)).execute(fruitTransaction2);
-    verify(operationHandlerReturn, times(3)).execute(fruitTransaction1);
-    verify(operationHandlerSupply, times(4)).execute(fruitTransaction3);
-    verify(operationHandlerPurchase, times(2)).execute(fruitTransaction4);
+        FruitTransaction fruitTransaction1 = new FruitTransaction(Operation.RETURN, "apple", 230);
+        FruitTransaction fruitTransaction2 = new FruitTransaction(Operation.BALANCE, "apple", 230);
+        FruitTransaction fruitTransaction3 = new FruitTransaction(Operation.SUPPLY, "apple", 230);
+        FruitTransaction fruitTransaction4 = new FruitTransaction(Operation.PURCHASE, "apple", 230);
+        fruitTransactions.add(fruitTransaction1);
+        fruitTransactions.add(fruitTransaction1);
+        fruitTransactions.add(fruitTransaction1);
+        fruitTransactions.add(fruitTransaction2);
+        fruitTransactions.add(fruitTransaction3);
+        fruitTransactions.add(fruitTransaction3);
+        fruitTransactions.add(fruitTransaction3);
+        fruitTransactions.add(fruitTransaction3);
+        fruitTransactions.add(fruitTransaction4);
+        fruitTransactions.add(fruitTransaction4);
+        storageService.process(fruitTransactions);
+        verify(operationHandlerBalance, times(1)).execute(fruitTransaction2);
+        verify(operationHandlerReturn, times(3)).execute(fruitTransaction1);
+        verify(operationHandlerSupply, times(4)).execute(fruitTransaction3);
+        verify(operationHandlerPurchase, times(2)).execute(fruitTransaction4);
     }
 
 }
