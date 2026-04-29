@@ -8,19 +8,19 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionTest {
 
     @Test
-    void fruitTransaction_negativeQuantity_throwsException() {
+    void fruitTransaction_negativeQuantity_notOk() {
         assertThrows(IllegalArgumentException.class, () ->
                 new FruitTransaction(Operation.BALANCE, "apple", -20));
     }
 
     @Test
-    void fruitTransaction_nullFruit_throwsException() {
+    void fruitTransaction_nullFruit_notOk() {
         assertThrows(IllegalArgumentException.class, () ->
                 new FruitTransaction(Operation.BALANCE, null, 10));
     }
 
     @Test
-    void fruitTransaction_blankFruit_throwsException() {
+    void fruitTransaction_blankFruit_notOk() {
         assertThrows(IllegalArgumentException.class, () ->
                 new FruitTransaction(Operation.BALANCE, "", 10));
     }

@@ -23,7 +23,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void execute_notExistingFruit_throwsException() {
+    void execute_notExistingFruit_notOk() {
         when(storageDao.checkFruit("apple")).thenReturn(false);
         assertThrows(RuntimeException.class,
                 () -> returnOperationHandler.execute(fruitTransaction));

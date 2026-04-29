@@ -26,7 +26,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readTransactionsFromFile_wrongFileName_ThrowsException() {
+    void readTransactionsFromFile_wrongFileName_notOk() {
         assertThrows(RuntimeException.class, () ->
                 fileReaderImpl.readTransactionsFromFile("test.csv"));
     }

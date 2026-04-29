@@ -20,7 +20,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertToTransaction_wrongInteger_ThrowsException() {
+    void convertToTransaction_wrongInteger_notOk() {
 
         list.add("b, apple, banana");
         assertThrows(IllegalArgumentException.class, () ->
@@ -28,7 +28,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertToTransaction_wrongTransaction_ThrowsException() {
+    void convertToTransaction_wrongTransaction_notOk() {
 
         list.add("b, apple, 80, 20");
         assertThrows(IllegalArgumentException.class, () ->
@@ -51,28 +51,28 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertTransaction_wrongCode_ThrowsException() {
+    void convertTransaction_wrongCode_notOk() {
         list.add("a, apple, 80");
         assertThrows(IllegalArgumentException.class, () ->
                 dataConverterImpl.convertToTransaction(list));
     }
 
     @Test
-    void convertTransaction_emptyCode_ThrowsException() {
+    void convertTransaction_emptyCode_notOk() {
         list.add(", apple, 80");
         assertThrows(IllegalArgumentException.class, () ->
                 dataConverterImpl.convertToTransaction(list));
     }
 
     @Test
-    void convertTransaction_emptyFruit_ThrowsException() {
+    void convertTransaction_emptyFruit_notOk() {
         list.add("b, , 80");
         assertThrows(IllegalArgumentException.class, () ->
                 dataConverterImpl.convertToTransaction(list));
     }
 
     @Test
-    void convertTransaction_emptyInput_throwsException() {
+    void convertTransaction_emptyInput_notOk() {
         assertThrows(IllegalArgumentException.class, () ->
                 dataConverterImpl.convertToTransaction(list));
     }
@@ -99,7 +99,7 @@ class DataConverterImplTest {
     }
 
     @Test
-    void convertTransaction_nullInput_throwsException() {
+    void convertTransaction_nullInput_notOk() {
         assertThrows(IllegalArgumentException.class, () ->
                 dataConverterImpl.convertToTransaction(null));
     }

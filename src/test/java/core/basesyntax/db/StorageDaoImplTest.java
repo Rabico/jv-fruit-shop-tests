@@ -34,17 +34,17 @@ class StorageDaoImplTest {
     }
 
     @Test
-    void add_nullFruit_throwsException() {
+    void add_nullFruit_notOk() {
         assertThrows(NullPointerException.class, () -> storageDao.add(null));
     }
 
     @Test
-    void actualQuantity_fruitNull_throwsException() {
+    void actualQuantity_fruitNull_notOk() {
         assertThrows(RuntimeException.class, () -> storageDao.actualQuantity(null));
     }
 
     @Test
-    void actualQuantity_notExistFruit_throwsException() {
+    void actualQuantity_notExistFruit_notOk() {
         assertThrows(RuntimeException.class, () -> storageDao.actualQuantity("apple"));
     }
 

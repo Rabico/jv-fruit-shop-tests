@@ -21,7 +21,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void reportGenerator_twoFruits_ok() {
+    void generateReport_twoFruits_ok() {
 
         Map<String, Integer> actualMap = new LinkedHashMap<>();
         actualMap.put("apple", 10);
@@ -40,13 +40,13 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void reportGenerator_emptyMap_ok() {
+    void generateReport_emptyMap_ok() {
         when(storageDao.getData()).thenReturn(new LinkedHashMap<>());
         assertEquals("fruit,quantity" + System.lineSeparator(), reportGenerator.generateReport());
     }
 
     @Test
-    void reportGenerator_oneFruit_ok() {
+    void generateReport_oneFruit_ok() {
         Map<String, Integer> actualMap = new LinkedHashMap<>();
         actualMap.put("apple", 10);
         when(storageDao.getData()).thenReturn(actualMap);
@@ -61,7 +61,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void reportGenerator_fourFruits_ok() {
+    void generateReport_fourFruits_ok() {
 
         Map<String, Integer> actualMap = new LinkedHashMap<>();
         actualMap.put("pineapple", 30);

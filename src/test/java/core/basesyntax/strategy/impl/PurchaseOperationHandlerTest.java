@@ -24,14 +24,14 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void execute_notExistingFruit_ThrowsException() {
+    void execute_notExistingFruit_notOk() {
         when(storageDao.checkFruit("apple")).thenReturn(false);
         assertThrows(RuntimeException.class, () ->
                 purchaseOperationHandler.execute(fruitTransaction));
     }
 
     @Test
-    void execute_negativeBalance_ThrowsException() {
+    void execute_negativeBalance_notOk() {
         when(storageDao.checkFruit("apple")).thenReturn(true);
         when(storageDao.actualQuantity("apple")).thenReturn(5);
         assertThrows(IllegalArgumentException.class, () ->

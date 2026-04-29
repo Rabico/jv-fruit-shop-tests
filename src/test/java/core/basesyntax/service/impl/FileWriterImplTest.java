@@ -30,17 +30,17 @@ class FileWriterImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        file.delete();
     }
 
     @Test
-    void writeReportToFile_emptyFile_ThrowsException() {
+    void writeReportToFile_emptyFile_notOk() {
         assertThrows(RuntimeException.class, () ->
                 fileWriterImpl.writeReportToFile("Report", ""));
     }
 
     @Test
-    void writeReportToFile_nullFileName_ThrowsException() {
+    void writeReportToFile_nullFileName_notOk() {
         assertThrows(RuntimeException.class, () ->
                 fileWriterImpl.writeReportToFile("Report", null));
     }
